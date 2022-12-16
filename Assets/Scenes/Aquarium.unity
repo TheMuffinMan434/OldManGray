@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: aadd5a709a48466c887296bb5b1b8110, type: 2}
+    - target: {fileID: -4483254102572312135, guid: c0c8a6cb40ea59244958cedda79f5f30, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aadd5a709a48466c887296bb5b1b8110, type: 2}
     - target: {fileID: -3756473180518285571, guid: c0c8a6cb40ea59244958cedda79f5f30, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
@@ -223,6 +227,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: -1823322365421230674, guid: c0c8a6cb40ea59244958cedda79f5f30, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c719e38f25a9480abd2480ab621a2949, type: 2}
     - target: {fileID: -1599826595754709761, guid: c0c8a6cb40ea59244958cedda79f5f30, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 8
@@ -279,6 +287,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 3372308932851137170, guid: c0c8a6cb40ea59244958cedda79f5f30, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aadd5a709a48466c887296bb5b1b8110, type: 2}
     - target: {fileID: 3887904730611918569, guid: c0c8a6cb40ea59244958cedda79f5f30, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
@@ -966,6 +978,7 @@ GameObject:
   - component: {fileID: 900410703}
   - component: {fileID: 900410704}
   - component: {fileID: 900410705}
+  - component: {fileID: 900410706}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1036,7 +1049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe267cb2a5d357e4e94412181e3d5e47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 6
+  walkSpeed: 5.92
   sprintSpeed: 13
   crouchSpeed: 3
   gravity: -13
@@ -1081,6 +1094,19 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &900410706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900410698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67cbd7cabac26754783fa6cc2b09d223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  caught: 0
 --- !u!1 &921222365
 GameObject:
   m_ObjectHideFlags: 0
@@ -6392,6 +6418,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1726765763}
   player: {fileID: 900410702}
+  caught: {fileID: 900410706}
   playerInSight: 0
   whatIsGround:
     serializedVersion: 2
@@ -6401,9 +6428,8 @@ MonoBehaviour:
     m_Bits: 8
   walkPointRange: 20
   walkPoint: {x: 0, y: 0, z: 0}
-  timeBetweenAttacks: 5
-  susRange: 15
-  foundRange: 0
+  susRange: 20
+  foundRange: 10
   playerInSusRange: 0
   playerInFoundRange: 0
 --- !u!1 &1827207775

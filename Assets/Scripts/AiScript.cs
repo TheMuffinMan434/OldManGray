@@ -8,8 +8,10 @@ public class AiScript : MonoBehaviour
     public NavMeshAgent agent;
 
     public Transform player;
+    public Caught caught;
 
     public bool playerInSight;
+    string collideTag;
 
     //patroliing
     public LayerMask whatIsGround, whatIsPlayer;
@@ -18,8 +20,7 @@ public class AiScript : MonoBehaviour
     public Vector3 walkPoint;
 
     //attacking
-    public float timeBetweenAttacks;
-    bool alreadyAttacked;
+
 
     //states
     public float susRange, foundRange;
@@ -29,6 +30,7 @@ public class AiScript : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        caught.caught = false;
     }
 
     private void Update()
@@ -47,14 +49,15 @@ public class AiScript : MonoBehaviour
     {
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         Physics.Raycast(transform.position, fwd, out RaycastHit hit);
-        string tag = hit.collider.tag;
+        
 
         if (hit.collider)
-            tag = hit.collider.tag;
+            collideTag = hit.collider.tag;
 
-        if (tag == "Player")
+        if (collideTag == "Player")
             playerInSight = true;
-        else
+
+        else if (!playerInSusRange)
             playerInSight = false;
     }
 
@@ -93,19 +96,23 @@ public class AiScript : MonoBehaviour
 
     private void AttackPlayer()
     {
-        agent.SetDestination(transform.position);
+        agent.speed = 6.5f;
+        agent.SetDestination(player.position);
 
         transform.LookAt(player);
 
-        if (!alreadyAttacked)
+        Vector3 distanceToPlayer = transform.position - player.position;
+        if (distanceToPlayer.magnitude < 1.7f)
         {
-            alreadyAttacked = true;
-            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+            caught.caught = true;
         }
+        else
+            caught.caught = false;
+        
     }
 
-    private void ResetAttack()
+    /*private void ResetAttack()
     {
         alreadyAttacked = false;
-    }
+    }*/
 }
