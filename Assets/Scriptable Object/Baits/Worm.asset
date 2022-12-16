@@ -15,11 +15,11 @@ MonoBehaviour:
   title: Worm
   image: {fileID: 21300000, guid: 2e7952719f0e3ba4a945e97038c7ace2, type: 3}
   fishes:
-  - name: OneFish
+  - name: Red
     effectiveness: 100
-  - name: TwoFish
+  - name: Orange
     effectiveness: 5
-  - name: RedFish
+  - name: Yellow
     effectiveness: 30
-  - name: BlueFish
+  - name: Green
     effectiveness: 60

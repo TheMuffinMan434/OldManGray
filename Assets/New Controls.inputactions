@@ -1,0 +1,34 @@
+{
+    "name": "New Controls",
+    "maps": [
+        {
+            "name": "PlayerInput",
+            "id": "3cabe798-73a9-403e-b2de-e8a2db917946",
+            "actions": [
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "36a48536-5d30-476c-a66f-d22feb16cf46",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "af0a5764-aaa2-4bf3-a84c-5eba1b703463",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

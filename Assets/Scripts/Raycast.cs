@@ -7,6 +7,7 @@ public class Raycast : MonoBehaviour
 {
     public GameObject fButton;
     bool hitInRange;
+    string hitTag;
     void Start()
     {
 
@@ -17,13 +18,16 @@ public class Raycast : MonoBehaviour
         Physics.Raycast(transform.position, fwd, out RaycastHit hit);
         hitInRange = hit.distance <= 5;
 
-        if(hit.collider.CompareTag("Fishing")){
+        if(hit.collider)
+           hitTag = hit.collider.tag;
+
+        if(hitTag == "Fishing" && hitInRange)
+        {
             fButton.SetActive(true);
         }
         else
         {
             fButton.SetActive(false);
         }
-        
     }
 }

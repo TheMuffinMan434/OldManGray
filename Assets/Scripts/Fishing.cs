@@ -1,19 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Fishing : MonoBehaviour
 {
-    
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
+    SceneManagement activeScene;
     
     void Update()
     {
-        
+        int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+        if (sceneIndex == 2 && Input.GetKeyDown(KeyCode.Tab))
+            TabToClose();
+    }
+
+
+    void TabToClose()
+    {
+        Debug.Log("closing");
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            activeScene.LoadAquarium();
+        }
     }
 }
