@@ -25,7 +25,7 @@ public class Fishes : MonoBehaviour
 
     Quaternion currentRotation;
     Vector3 currentEuler;
-    public GameObject fishBeacon;
+    public Transform fishBeacon;
     bool hitInRange;
     public string hitDirection;
     bool bite = false;
@@ -142,12 +142,12 @@ public class Fishes : MonoBehaviour
 
     void Bite(string direction)
     {
-        currentEuler += new Vector3(0f, 0f, 1f) * Time.deltaTime;
+        /*currentEuler += new Vector3(0f, 0f, 1f) * Time.deltaTime;
         currentRotation.eulerAngles = currentEuler;
-        transform.rotation = currentRotation;
-        if(transform.position == fishBeacon.transform.position)
+        transform.rotation = currentRotation;*/
+        transform.LookAt(fishBeacon);
+        if(transform.position == fishBeacon.position)
         {
-            //its fishing time
             Debug.Log("its fishing time");
         }
     }

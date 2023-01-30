@@ -19,7 +19,7 @@ public class FishSpawner : MonoBehaviour
     public float fastestSpeed;
     public float slowestSpeed;
     public GameObject canvas;
-    public GameObject fishBeacon;
+    public Transform fishBeacon;
 
     void Start()
     {

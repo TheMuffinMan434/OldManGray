@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine. UI;
 
 public class AiScript : MonoBehaviour
 {
@@ -11,59 +12,48 @@ public class AiScript : MonoBehaviour
     public Caught caught;
 
     public bool playerInSight;
-    string collideTag;
 
-    //patroliing
+    //other scripts
+    public FieldofView fov;
+    public DetectionBarController detection;
+
+    //patrolling
     public LayerMask whatIsGround, whatIsPlayer;
     bool walkPointSet;
     public float walkPointRange;
     public Vector3 walkPoint;
+    public float patrollingSpeed;
 
     //attacking
+    public float chasingSpeed;
 
-
-    //states
-    public float susRange, foundRange;
-    public bool playerInSusRange, playerInFoundRange;
+    //GameObjects 
+    public GameObject dectContainer;
+    public GameObject seen;
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
         caught.caught = false;
+        dectContainer.SetActive(false);
+        seen.SetActive(false);
     }
 
     private void Update()
     {
-        Raycast();
-        playerInSusRange = Physics.CheckSphere(transform.position, susRange, whatIsPlayer);
-        playerInFoundRange = Physics.CheckSphere(transform.position, foundRange, whatIsPlayer);
-
-        if (!playerInSusRange && !playerInFoundRange) Patroling();
-        if (playerInSusRange && !playerInFoundRange && !playerInSight) Patroling();
-        if (playerInSusRange && !playerInFoundRange && playerInSight) ChasePlayer();
-        if (playerInSusRange && playerInFoundRange) AttackPlayer();
-    }
-
-    public void Raycast()
-    {
-        Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        Physics.Raycast(transform.position, fwd, out RaycastHit hit);
-        
-
-        if (hit.collider)
-            collideTag = hit.collider.tag;
-
-        if (collideTag == "Player")
-            playerInSight = true;
-
-        else if (!playerInSusRange)
-            playerInSight = false;
+        if (fov.canSeePlayer == false) Patroling();
+        if (fov.lookForPlayer == false) Patroling();
+        if (fov.lookForPlayer == true) Looking();
+        if (detection.found == true) ChasePlayer();
     }
 
     private void Patroling()
     {
         agent.speed = 3.5f;
+        agent.isStopped = false;
+        detection.NotSus();
+        if(detection.detectionLvl == 0) dectContainer.SetActive(false);
         if (!walkPointSet) SearchWalkPoint();
         if (agent.pathStatus == NavMeshPathStatus.PathInvalid || agent.pathStatus == NavMeshPathStatus.PathPartial) SearchWalkPoint();
 
@@ -88,18 +78,20 @@ public class AiScript : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) walkPointSet = true;
     }
 
-    private void ChasePlayer()
+    private void Looking()
     {
-        agent.SetDestination(player.position);
-        agent.speed = 1.5f;
+        agent.isStopped = true;
+        dectContainer.SetActive(true);
+        transform.LookAt(player);
     }
 
-    private void AttackPlayer()
+    private void ChasePlayer()
     {
-        agent.speed = 6.5f;
+        agent.isStopped = false;
+        dectContainer.SetActive(false);
+        seen.SetActive(true);
+        agent.speed = chasingSpeed;
         agent.SetDestination(player.position);
-
-        transform.LookAt(player);
 
         Vector3 distanceToPlayer = transform.position - player.position;
         if (distanceToPlayer.magnitude < 1.7f)
@@ -108,11 +100,5 @@ public class AiScript : MonoBehaviour
         }
         else
             caught.caught = false;
-        
     }
-
-    /*private void ResetAttack()
-    {
-        alreadyAttacked = false;
-    }*/
 }

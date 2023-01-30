@@ -14,7 +14,7 @@ public class CharacterControl : MonoBehaviour
     public static Rigidbody rb;
     Vector2 currentDir = Vector2.zero;
     Vector2 currentDirVelocity = Vector2.zero;
-    public static bool isCrouched;
+    public bool isCrouched;
     public static bool isSprinting;
     public GameObject player;
     public float speed;
