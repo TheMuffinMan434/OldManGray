@@ -16,6 +16,7 @@ public class AiScript : MonoBehaviour
     //other scripts
     public FieldofView fov;
     public DetectionBarController detection;
+    public Cupboard cupboard;
 
     //patrolling
     public LayerMask whatIsGround, whatIsPlayer;
@@ -44,8 +45,10 @@ public class AiScript : MonoBehaviour
     {
         if (fov.canSeePlayer == false) Patroling();
         if (fov.lookForPlayer == false) Patroling();
-        if (fov.lookForPlayer == true) Looking();
-        if (detection.found == true) ChasePlayer();
+        if (cupboard.inTheBoard == true) Patroling();
+        if (fov.lookForPlayer == true && cupboard.inTheBoard == false) Looking();
+        if (detection.found == true && cupboard.inTheBoard == false) ChasePlayer();
+        if (cupboard.inTheBoard) TheyInTheCupboard();
     }
 
     private void Patroling()
@@ -65,6 +68,7 @@ public class AiScript : MonoBehaviour
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
+
     }
 
     public void SearchWalkPoint()
@@ -100,5 +104,14 @@ public class AiScript : MonoBehaviour
         }
         else
             caught.caught = false;
+    }
+
+    private void TheyInTheCupboard()
+    {
+        seen.SetActive(false);
+        detection.found = false;
+        if(detection.detectionLvl == detection.maxDetection)
+            detection.detectionLvl -= 2;
+        
     }
 }

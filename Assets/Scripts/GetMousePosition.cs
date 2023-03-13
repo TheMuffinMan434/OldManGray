@@ -10,7 +10,6 @@ public class GetMousePosition : MonoBehaviour
     /*private InputActionReference pointerPosition;*/
 
     public Rod rod;
-    public Image rodImage;
     public bool leftClick = false;
 
     void Update()

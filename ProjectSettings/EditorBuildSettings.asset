@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fishing Wondow.unity
     guid: 8fc6c3443b374754c9e82758a2b49a57
+  - enabled: 1
+    path: Assets/Scenes/TopFishing.unity
+    guid: 8250b512738cf1d4586adf70ffa9d8e4
   m_configObjects: {}

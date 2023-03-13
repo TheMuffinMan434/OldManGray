@@ -8,7 +8,8 @@ public class SceneManagement : MonoBehaviour
 {
     //MainMenu = 0
     //Aquarium = 1
-    //Fishing Wondow = 2
+    //Fishing Window = 2
+    //New Fishing Window = 3
     public bool isFishing = false;
     public bool isAquarium = true;
     private void Update()
@@ -28,7 +29,7 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadFishing()
     {
-        SceneManager.LoadScene(2, LoadSceneMode.Additive);  
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);  
     }
 
 }

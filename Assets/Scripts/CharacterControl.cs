@@ -19,6 +19,7 @@ public class CharacterControl : MonoBehaviour
     public GameObject player;
     public float speed;
 
+
     CharacterController controller = null;
 
     void Awake()

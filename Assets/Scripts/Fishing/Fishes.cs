@@ -18,6 +18,8 @@ public class Fishes : MonoBehaviour
     public int swimRange;
     public Vector2 swimPoint;
 
+    //Beacon Check
+    public LayerMask beaconMask;
 
     /*public GraphicRaycaster raycaster;
     public EventSystem eventSystem;
@@ -33,7 +35,9 @@ public class Fishes : MonoBehaviour
     void Update()
     {
         Move();
-        Raycast();
+        BeaconCheck();
+        /*Raycast();*/
+
     }
 
     void Raycast()
@@ -111,6 +115,17 @@ public class Fishes : MonoBehaviour
             }
         }
 
+    }
+
+    public void BeaconCheck()
+    {
+        Collider[] colliderCheck = Physics.OverlapSphere(transform.position, 20f, beaconMask);
+        Debug.Log(colliderCheck.Length);
+
+        if (colliderCheck.Length != 0)
+        {
+            transform.LookAt(fishBeacon);
+        }
     }
 
     void Move()

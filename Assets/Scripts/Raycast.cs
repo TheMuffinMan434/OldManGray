@@ -6,8 +6,10 @@ using UnityEngine.SceneManagement;
 public class Raycast : MonoBehaviour
 {
     public GameObject fButton;
+    public GameObject hButton;
     bool hitInRange;
     string hitTag;
+    public Cupboard cupboard;
     void Start()
     {
 
@@ -21,13 +23,12 @@ public class Raycast : MonoBehaviour
         if(hit.collider)
            hitTag = hit.collider.tag;
 
-        if(hitTag == "Fishing" && hitInRange)
-        {
-            fButton.SetActive(true);
-        }
-        else
-        {
-            fButton.SetActive(false);
-        }
+        //Show fishing button
+        if(hitTag == "Fishing" && hitInRange) fButton.SetActive(true);
+        else fButton.SetActive(false);
+
+        //Show hide button
+        if (hitTag == "Cupboard" && hitInRange && !cupboard.inTheBoard) hButton.SetActive(true);
+        else hButton.SetActive(false);
     }
 }

@@ -20,6 +20,7 @@ public class FishSpawner : MonoBehaviour
     public float slowestSpeed;
     public GameObject canvas;
     public Transform fishBeacon;
+    public LayerMask beaconMask;
 
     void Start()
     {
@@ -81,6 +82,7 @@ public class FishSpawner : MonoBehaviour
         fishScript.speed *= fishScript.speedMult;
         fishScript.biteArea = biteArea;
         fishScript.fishBeacon = fishBeacon;
+        fishScript.beaconMask = beaconMask;
         /*fishScript.raycaster = canvas.GetComponent<GraphicRaycaster>();
         fishScript.eventSystem = GetComponent<EventSystem>();*/
 

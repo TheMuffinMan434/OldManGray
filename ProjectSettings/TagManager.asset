@@ -6,6 +6,7 @@ TagManager:
   tags:
   - RepelantWave
   - Fishing
+  - Cupboard
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - Obstruction
   - Floor
   - Wall
-  - 
+  - Beacon
   - 
   - 
   - 

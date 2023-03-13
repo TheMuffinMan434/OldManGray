@@ -11,7 +11,8 @@ public class DetectionBarController : MonoBehaviour
     public FieldofView inView;
     public bool found = false;
     public bool stillSus = true;
-    private float time = 0;
+    public float time = 1;
+    public Cupboard cupboard;
 
     private void Update()
     {
@@ -42,14 +43,26 @@ public class DetectionBarController : MonoBehaviour
         {
             detectionLvl -= Time.deltaTime;
             detectionBar.fillAmount = detectionLvl / maxDetection;
-            time = 0;
         }
         if (detectionLvl <= 0)
         {
             detectionLvl = 0;
-            time += Time.deltaTime;
+            if (inView.lookForPlayer == true && !cupboard.inTheBoard)
+            {
+                time += Time.deltaTime;
+                Debug.Log(Mathf.RoundToInt(time));
+                if (Mathf.Round(time) % 3 == 0)
+                {
+                    inView.CallEnumerator();
+                }
+                /*StartCoroutine(WalkTimer());*/
+            }
         }
-            
     }
 
+    public IEnumerator WalkTimer()
+    {
+        yield return new WaitForSeconds(3);
+        inView.CallEnumerator();
+    }
 }

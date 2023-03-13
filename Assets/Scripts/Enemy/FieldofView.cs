@@ -13,7 +13,7 @@ public class FieldofView : MonoBehaviour
     public LayerMask targetMask;
     public LayerMask obstructionMask;
     public LayerMask wallMask;
-
+    
     public bool canSeePlayer;
     public bool lookForPlayer;
     public CharacterControl player;
@@ -68,7 +68,6 @@ public class FieldofView : MonoBehaviour
                     else
                         canSeePlayer = true;
                 }
-
             }
             else
                 canSeePlayer = false;
@@ -79,7 +78,7 @@ public class FieldofView : MonoBehaviour
         LookForPlayer(rangeChecks.Length);
         
 
-        Debug.Log("see player: " + canSeePlayer);
+        /*Debug.Log("see player: " + canSeePlayer);*/
     }
 
     public void LookForPlayer(int inRange)
@@ -90,13 +89,24 @@ public class FieldofView : MonoBehaviour
             lookForPlayer = false;
     }
 
-
-    public void WalkAway()
+    public void CallEnumerator()
     {
-        Debug.Log("going");
-        waitSec = 4f;
-        canSeePlayer = false;
+        StartCoroutine(WalkAway());
+    }
+
+
+    public IEnumerator WalkAway()
+    {
+        Debug.Log("leaving");
+        StopCoroutine(FOVRoutine());
         lookForPlayer = false;
+        canSeePlayer = false;
+        yield return new WaitForSeconds(3);
+        StartCoroutine(FOVRoutine());
+        yield return new WaitForSeconds(3);
+        detection.time = 1;
+        yield return new WaitForSeconds(3);
+        StopCoroutine(WalkAway());
     }
 
 
