@@ -12,6 +12,13 @@ public class QTEKeys : MonoBehaviour
     public TMP_Text text;
     public int index;
 
+
+    private void Start()
+    {
+        foreach (KeyCodeInfo keyCodeInfo in possibleKeys)
+            keyCodeInfo.inUse = false;
+    }
+
     private void Awake()
     {
         GetThisKeyCode();
