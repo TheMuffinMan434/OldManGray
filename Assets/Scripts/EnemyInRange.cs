@@ -5,21 +5,18 @@ using UnityEngine.UI;
 
 public class EnemyInRange : MonoBehaviour
 {
-    /*public FieldofView fov;*/
+    public EnemyDetector enemyDetector;
     public Image exclamation;
     void Start()
     {
-        /*fov = GameObject.FindGameObjectWithTag("Enemy").*/
         exclamation.enabled = false;
     }
 
     void Update()
     {
-       /* if (fov.lookForPlayer)
-        {
+        if (enemyDetector.nearby)
             exclamation.enabled = true;
-        }
         else
-            exclamation.enabled = false;*/
+            exclamation.enabled = false;
     }
 }

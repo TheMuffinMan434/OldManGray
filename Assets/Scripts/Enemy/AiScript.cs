@@ -17,6 +17,7 @@ public class AiScript : MonoBehaviour
     public FieldofView fov;
     public DetectionBarController detection;
     public Cupboard cupboard;
+    public EnemyDetector enemyDetector;
 
     //patrolling
     public LayerMask whatIsGround, whatIsPlayer;
@@ -39,6 +40,7 @@ public class AiScript : MonoBehaviour
         caught.caught = false;
         dectContainer.SetActive(false);
         seen.SetActive(false);
+        enemyDetector.nearby = false;
     }
 
     private void Update()
@@ -56,6 +58,7 @@ public class AiScript : MonoBehaviour
         agent.speed = 3.5f;
         agent.isStopped = false;
         detection.NotSus();
+        enemyDetector.nearby = false;
         if(detection.detectionLvl == 0) dectContainer.SetActive(false);
         if (!walkPointSet) SearchWalkPoint();
         if (agent.pathStatus == NavMeshPathStatus.PathInvalid || agent.pathStatus == NavMeshPathStatus.PathPartial) SearchWalkPoint();
@@ -84,6 +87,7 @@ public class AiScript : MonoBehaviour
 
     private void Looking()
     {
+        enemyDetector.nearby = true;
         agent.isStopped = true;
         dectContainer.SetActive(true);
         transform.LookAt(player);
@@ -112,6 +116,5 @@ public class AiScript : MonoBehaviour
         detection.found = false;
         if(detection.detectionLvl == detection.maxDetection)
             detection.detectionLvl -= 2;
-        
     }
 }

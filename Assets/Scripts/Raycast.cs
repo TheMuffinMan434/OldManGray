@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Raycast : MonoBehaviour
 {
+    public SceneManagement sceneManagement;
     public GameObject fButton;
     public GameObject hButton;
     bool hitInRange;
@@ -24,7 +25,11 @@ public class Raycast : MonoBehaviour
            hitTag = hit.collider.tag;
 
         //Show fishing button
-        if(hitTag == "Fishing" && hitInRange) fButton.SetActive(true);
+        if (hitTag == "Fishing" && hitInRange)
+        {
+            if (sceneManagement.isFishing) fButton.SetActive(false);
+            else fButton.SetActive(true);
+        }
         else fButton.SetActive(false);
 
         //Show hide button

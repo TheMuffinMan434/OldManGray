@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Aquarium.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Fishing Wondow.unity
+    path: Assets/NotInUse/Fishing Wondow.unity
     guid: 8fc6c3443b374754c9e82758a2b49a57
   - enabled: 1
     path: Assets/Scenes/TopFishing.unity

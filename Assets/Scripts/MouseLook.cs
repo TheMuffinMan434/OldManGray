@@ -13,6 +13,8 @@ public class MouseLook : MonoBehaviour
 
     float cameraPitch = 0.0f;
 
+    public SceneManagement sceneScript;
+
     Vector2 currentMouseDelta = Vector2.zero;
     Vector2 currentMouseDeltaVelocity = Vector2.zero;
 
@@ -28,6 +30,14 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
+        if (!sceneScript.isFishing)
+        {
+            Looking();
+        }
+    }
+
+    public void Looking()
+    {
         Vector2 targetMouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
         currentMouseDelta = Vector2.SmoothDamp(currentMouseDelta, targetMouseDelta, ref currentMouseDeltaVelocity, mouseSmoothTime);
@@ -39,6 +49,5 @@ public class MouseLook : MonoBehaviour
         playerCamera.localEulerAngles = Vector3.right * cameraPitch;
 
         transform.Rotate(Vector3.up * targetMouseDelta.x * mouseSensitivity);
-
     }
 }

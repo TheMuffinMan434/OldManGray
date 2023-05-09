@@ -1,22 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Caught : MonoBehaviour
 {
     public bool caught;
-    // Start is called before the first frame update
+    public GameObject caughtUI;
+    public Image background;
+    public Color color;
+    public SceneManagement scenes;
+
     void Start()
     {
-        
+        caughtUI.SetActive(false);
+        color.a = 1;
+        background.color = color;
+        background.CrossFadeAlpha(0f, 0f, true);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (caught)
         {
-            Debug.Log("you got caught");
+            if (scenes.isFishing)
+                scenes.CloseFishing();
+            caughtUI.SetActive(true);
+            FadeToBlack(background, 1f, .5f, delegate { scenes.LoadMenu(); });
         }
+    }
+
+    void FadeToBlack(Image image, float alpha, float duration, System.Action action)
+    {
+        StartCoroutine(CrossFadeAlpha(image, alpha, duration, action));
+    }
+
+    IEnumerator CrossFadeAlpha(Image image, float alpha, float duration, System.Action action)
+    {
+        image.CrossFadeAlpha(alpha, duration, false);
+        yield return new WaitForSeconds(5);
+        action.Invoke();
     }
 }

@@ -11,10 +11,23 @@ public class SceneManagement : MonoBehaviour
     //Fishing Window = 2
     //New Fishing Window = 3
     public bool isFishing = false;
-    public bool isAquarium = true;
+    public Scene currentScene;
+
+    private void Start()
+    {
+        /*LoadMenu();*/
+    }
     private void Update()
     {
-        
+        CheckActiveScene();
+        currentScene = SceneManager.GetActiveScene();
+    }
+
+    public void CheckActiveScene()
+    {
+        if (isFishing)
+            if (Input.GetKeyDown(KeyCode.Tab))
+                CloseFishing();
     }
 
     public void LoadMenu()
@@ -29,7 +42,14 @@ public class SceneManagement : MonoBehaviour
 
     public void LoadFishing()
     {
-        SceneManager.LoadScene(3, LoadSceneMode.Additive);  
+        SceneManager.LoadScene(3, LoadSceneMode.Additive);
+        isFishing = true;
+    }
+
+    public void CloseFishing()
+    {
+        SceneManager.UnloadSceneAsync(3);
+        isFishing = false;
     }
 
 }

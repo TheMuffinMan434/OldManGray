@@ -76,9 +76,6 @@ public class FieldofView : MonoBehaviour
             canSeePlayer = false;
 
         LookForPlayer(rangeChecks.Length);
-        
-
-        /*Debug.Log("see player: " + canSeePlayer);*/
     }
 
     public void LookForPlayer(int inRange)
