@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: BaitList
   m_EditorClassIdentifier: 
   baits:
-  - name: No Bait
-    image: {fileID: 21300000, guid: 6e223bfde6c82cc48b4f14635e086b22, type: 3}
-  - name: Worm
-    image: {fileID: 21300000, guid: 59869789a9658144f9b42e889cc9c64a, type: 3}
-  - name: Cricket
-    image: {fileID: 21300000, guid: 341104ca2add0d04584c43d874426020, type: 3}
+  - {fileID: 11400000, guid: 9cebb1315ec816d4ba2eab291caf6ca8, type: 2}
+  - {fileID: 11400000, guid: 9ef0ce02612038948b0c4fff57345072, type: 2}
+  - {fileID: 11400000, guid: e22dc7af4f62c88459cdcb52f59ce538, type: 2}
+  - {fileID: 11400000, guid: 0ee17f5a11735fc42aaea53461296b07, type: 2}
+  - {fileID: 11400000, guid: 6b0e03d7e8727c147b16a306ae2348c9, type: 2}

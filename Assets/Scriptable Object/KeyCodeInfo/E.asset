@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   keyCode: 101
   KeyCodeText: E
-  inUse: 1
+  inUse: 0

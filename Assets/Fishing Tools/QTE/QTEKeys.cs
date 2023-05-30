@@ -10,14 +10,7 @@ public class QTEKeys : MonoBehaviour
     KeyCode thisKey;
     public Button button;
     public TMP_Text text;
-    public int index;
-
-
-    private void Start()
-    {
-        foreach (KeyCodeInfo keyCodeInfo in possibleKeys)
-            keyCodeInfo.inUse = false;
-    }
+    private int index;
 
     private void Awake()
     {

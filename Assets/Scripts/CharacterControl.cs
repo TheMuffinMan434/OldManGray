@@ -18,6 +18,7 @@ public class CharacterControl : MonoBehaviour
     public static bool isSprinting;
     public GameObject player;
     public float speed;
+    public SceneManagement scene;
 
 
     CharacterController controller = null;
@@ -62,7 +63,11 @@ public class CharacterControl : MonoBehaviour
             isSprinting = false;
         }
 
-        if(!isSprinting && !isCrouched)
+        if (scene.isFishing)
+        {
+            speed = 0;
+        }
+        else if (!isSprinting && !isCrouched)
         {
             speed = walkSpeed;
         }
@@ -74,7 +79,7 @@ public class CharacterControl : MonoBehaviour
         {
             speed = sprintSpeed;
         }
-        else if(!isSprinting && isCrouched)
+        else if (!isSprinting && isCrouched)
         {
             speed = crouchSpeed;
         }

@@ -11,13 +11,17 @@ public class Hook : MonoBehaviour
     public bool moving;
     public bool fishingFail;
     public Vector3 home;
+    private Vector3 magToHome;
     public bool engaged;
     public bool goingUp;
-    public TMP_Text count;
+    public TMP_Text score;
     public GameObject progressBar;
     public ProgressBarPoint progressScriptable;
+    public BaitImage baitImgScript;
+    public string baitSelected;
+    public int fishCountMultiplier;
 
-    public int fishCounter;
+    public FishingScore fishingScore;
 
     public void Start()
     {
@@ -26,7 +30,6 @@ public class Hook : MonoBehaviour
         atHome = true;
         goingUp = false;
         fishingFail = false;
-        fishCounter = 0;
 
         home = transform.position; 
         
@@ -34,7 +37,8 @@ public class Hook : MonoBehaviour
 
     private void Update()
     {
-        count.text = fishCounter.ToString();
+        baitSelected = baitImgScript.baitName;
+        score.text = fishingScore.fishingScore.ToString();
         PointerPosition = GetPointerInput();
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && atHome) {
@@ -60,7 +64,9 @@ public class Hook : MonoBehaviour
             fishingFail = true;
         }
 
-        if (transform.position == home) NotFishing();
+
+        magToHome = transform.position - home;
+        if (magToHome.magnitude < .5f) NotFishing();
         else atHome = false;
 
         if (engaged) progressBar.SetActive(true);
@@ -114,5 +120,10 @@ public class Hook : MonoBehaviour
         double minRange = .5;
         double maxRange = 1;
         return value >= minRange && value <= maxRange;
+    }
+
+    public void ContinuousFishing()
+    {
+        
     }
 }

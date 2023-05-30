@@ -8,6 +8,7 @@ public class BaitImage : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
     public Bait baitList;
+    public string baitName;
 
     public Sprite imageTarg;
     public Image imageChange;
@@ -15,7 +16,7 @@ public class BaitImage : MonoBehaviour
     private void Update()
     {
         int value = dropdown.value;
-        string baitName = baitList.baits[value].name;
+        baitName = baitList.baits[value].baitName;
         ChangeImage(baitName);
     }
 
@@ -23,7 +24,7 @@ public class BaitImage : MonoBehaviour
     {
         for(int i = 0; i < baitList.baits.Length; i++)
         {
-            if (baitList.baits[i].name == name)
+            if (baitList.baits[i].baitName == name)
                 imageTarg = baitList.baits[i].image;
         }
         imageChange.sprite = imageTarg;

@@ -4,31 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Caught : MonoBehaviour
+public class DayEnd : MonoBehaviour
 {
-    public bool caught;
-    public GameObject caughtUI;
+    public bool dayEnd;
+    public GameObject dayEndUI;
     public Image background;
     public TMP_Text displayScore;
     public FishingScore score;
     public Color color;
     public SceneManagement scenes;
 
-    void Start()
+    private void Start()
     {
-        caughtUI.SetActive(false);
+        dayEnd = false;
         color.a = 1;
         background.color = color;
         background.CrossFadeAlpha(0f, 0f, true);
     }
 
-    void Update()
+    private void Update()
     {
-        if (caught)
+        if (dayEnd)
         {
-            if (scenes.isFishing)
-                scenes.CloseFishing();
-            caughtUI.SetActive(true);
+            if (scenes.isFishing) scenes.CloseFishing();
+            dayEndUI.SetActive(true);
             displayScore.text = "Your Score: " + score.fishingScore.ToString();
             FadeToBlack(background, 1f, .5f);
         }

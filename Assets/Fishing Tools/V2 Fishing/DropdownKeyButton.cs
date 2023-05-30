@@ -42,7 +42,7 @@ public class DropdownKeyButton : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(fwdKey) && hook.transform.position == hookScript.home)
-            Select();
+            Up();
         if (Input.GetKeyDown(backKey) && hook.transform.position == hookScript.home)
             Down();
         else
@@ -55,7 +55,7 @@ public class DropdownKeyButton : MonoBehaviour
         StartColorTween(dropdown.colors.normalColor, false);
     }
 
-    void Select()
+    void Up()
     {
         dropdownValue = dropdownValue + 1;
         if (dropdownValue >= baitList.baits.Length) dropdownValue = 0;

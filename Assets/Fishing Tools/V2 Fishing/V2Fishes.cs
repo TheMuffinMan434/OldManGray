@@ -9,15 +9,20 @@ public class V2Fishes : MonoBehaviour
     public Hook hookScript;
     public GameObject hook;
     public QTEButtonMaker buttonMaker;
-
+    public FishingScore scoreTracker;
+    
     public float speed;
-    public float speedMult = 1;
     public bool swimPointSet;
     public int swimRange;
     public Vector2 swimPoint;
     public Vector3 distanceToHook;
 
     public bool fishEngaged = false;
+
+    //set individually
+    public Baits weakness;
+    public float speedMult;
+    public int pointsWorth;
 
     void Update()
     {
@@ -29,7 +34,7 @@ public class V2Fishes : MonoBehaviour
 
     void Move()
     {
-        transform.position += transform.up * (Time.deltaTime * speed);
+        transform.position += transform.up * (Time.deltaTime * speed * speedMult);
 
         if (transform.position.x > fishSpawner.spawnWidth || transform.position.x < -60)
             RemoveFish(false);
@@ -37,7 +42,7 @@ public class V2Fishes : MonoBehaviour
         if(!hookScript.atHome)
         {
             distanceToHook = transform.position - hook.transform.position;
-            if(distanceToHook.magnitude < 125 && !hookScript.engaged && !hookScript.moving)
+            if(distanceToHook.magnitude < 125 && !hookScript.engaged && !hookScript.moving && hookScript.baitSelected == weakness.baitName)
             {
                 ImHooked();
             }
@@ -76,7 +81,7 @@ public class V2Fishes : MonoBehaviour
         fishSpawner.fishCount -= 1;
         if (caught)
         {
-            hookScript.fishCounter += 1;
+            scoreTracker.fishingScore += pointsWorth;
             hookScript.engaged = false;
         }
     }

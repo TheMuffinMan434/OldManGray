@@ -17,7 +17,7 @@ public class SetUpDropdown : MonoBehaviour
         dropdown.ClearOptions();
         foreach (Baits bait in baitList.baits)
         {
-            dropdownOptions.Add(bait.name);
+            dropdownOptions.Add(bait.baitName);
         }
         dropdown.AddOptions(dropdownOptions);
     }

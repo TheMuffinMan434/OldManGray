@@ -6,16 +6,16 @@ using TMPro;
 public class Clock : MonoBehaviour
 {
     public TMP_Text clockText;
+    public DayEnd dayEndScript;
     float time;
     float hour;
     float min;
     string fullTime;
-    string amPm;
+    string pm = "PM";
 
     void Start()
     {
-        amPm = "AM";
-        clockText.text = "10:00 AM"; 
+        clockText.text = "1:00 AM"; 
     }
 
     void Update()
@@ -29,27 +29,26 @@ public class Clock : MonoBehaviour
         hour = time / 60;
         min = time % 60;
 
-        hour = Mathf.FloorToInt(hour);
+        hour = Mathf.FloorToInt(hour) + 1;
         min = Mathf.FloorToInt(min);
 
-        UpdateAMPM();
+        /*UpdateAMPM();*/
 
         if (min < 10)
-            fullTime = hour.ToString() + ":0" + min.ToString() + amPm;
+            fullTime = hour.ToString() + ":0" + min.ToString() + pm;
         else
-            fullTime = hour.ToString() + ":" + min.ToString() + amPm;
+            fullTime = hour.ToString() + ":" + min.ToString() + pm;
 
         clockText.text = fullTime;
+
+        if (hour == 5) ClosingTime();
     }
 
-    public void UpdateAMPM()
+    public void ClosingTime()
     {
-        if (amPm == "AM")
-        {
-            hour += 10;
-            if (hour == 12 && min == 1)
-                amPm = "PM";
-        }
+        dayEndScript.dayEnd = true;
     }
+
+    
 
 }

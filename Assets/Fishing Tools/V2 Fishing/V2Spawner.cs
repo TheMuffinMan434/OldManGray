@@ -21,6 +21,8 @@ public class V2Spawner : MonoBehaviour
     public float slowestSpeed;
     public GameObject canvas;
 
+    public FishingScore scoreTracker;
+
     void Start()
     {
         InitialPopulation();
@@ -90,6 +92,7 @@ public class V2Spawner : MonoBehaviour
         fishScript.hook = hook;
         fishScript.hookScript = hookScript;
         fishScript.buttonMaker = buttonMaker;
+        fishScript.scoreTracker = scoreTracker;
 
         return fishScript;
     }

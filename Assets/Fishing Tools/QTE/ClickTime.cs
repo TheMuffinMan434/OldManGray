@@ -45,8 +45,8 @@ public class ClickTime : MonoBehaviour
         deadScale = clickCircle.transform.localScale;
         PointCalc(deadScale);
         deadTextDisplay.text = deadText;
+        Debug.Log(deadText);
         Destroy(button);
-        /*RemoveButtonLocal(this.transform.position);*/
     }
 
     public void PointCalc(Vector3 deadScale)
@@ -82,11 +82,5 @@ public class ClickTime : MonoBehaviour
     public void SucsessDestroy()
     {
         Destroy(button);
-        /*RemoveButtonLocal(this.transform.position);*/
     }
-
-    /*public void RemoveButtonLocal(Vector3 location)
-    {
-        buttonLocal.locations.Remove(location);
-    }*/
 }
